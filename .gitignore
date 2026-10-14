@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+# 수강생 노드가 만드는 파일
+data/T-03/
+*.psbt
+*.dat
+.DS_Store

@@ -1,0 +1,37 @@
+{
+  "_source": "https://raw.githubusercontent.com/bitcoin/bitcoin/v31.1/src/test/pow_tests.cpp (\uba54\uc778\ub137 CalculateNextWorkRequired \ud14c\uc2a4\ud2b8 4\uac1c)",
+  "vectors": [
+    {
+      "name": "get_next_work",
+      "first_block_time": 1261130161,
+      "last_height": 32255,
+      "last_block_time": 1262152739,
+      "old_bits": 486604799,
+      "expected_bits": 486594666
+    },
+    {
+      "name": "get_next_work_pow_limit",
+      "first_block_time": 1231006505,
+      "last_height": 2015,
+      "last_block_time": 1233061996,
+      "old_bits": 486604799,
+      "expected_bits": 486604799
+    },
+    {
+      "name": "get_next_work_lower_limit_actual",
+      "first_block_time": 1279008237,
+      "last_height": 68543,
+      "last_block_time": 1279297671,
+      "old_bits": 470131700,
+      "expected_bits": 469854461
+    },
+    {
+      "name": "get_next_work_upper_limit_actual",
+      "first_block_time": 1263163443,
+      "last_height": 46367,
+      "last_block_time": 1269211443,
+      "old_bits": 473464687,
+      "expected_bits": 486597117
+    }
+  ]
+}

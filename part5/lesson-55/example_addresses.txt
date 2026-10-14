@@ -1,0 +1,4 @@
+# 연습용 주소 목록 — BIP84 문서의 공개 테스트 벡터 주소 (니모닉 abandon ×11 + about).
+# 실제 기관의 보유 주소가 아니다. 실습에서는 래핑 BTC·사이드체인·ETF가 공시한 주소로 바꾼다.
+bc1qcr8te4kr609gcawutmrza0j4xv80jy8z306fyu   # m/84h/0h/0h/0/0
+bc1qnjg0jd8228aq7egyzacy8cys3knf9xvrerkf9g   # m/84h/0h/0h/0/1

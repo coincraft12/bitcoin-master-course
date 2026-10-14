@@ -1,0 +1,18 @@
+{
+ "_note": "개인키 1(누구나 아는 키)의 예제 값. 3-3 s33-vectors·3-4 s34-q 슬라이드 값이며 lib로 재계산해 일치를 확인했다. 송금 금지.",
+ "private_key": 1,
+ "pubkey_uncompressed": "0479be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8",
+ "pubkey_compressed": "0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798",
+ "pubkey_xonly": "79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798",
+ "hash160_compressed": "751e76e8199196d454941c45d1b3a323f1433bd6",
+ "p2pkh_compressed": "1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH",
+ "p2pkh_uncompressed": "1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm",
+ "p2pkh_compressed_regtest": "mrCDrCybB6J1vRfbwM5hemdJz73FwDBC8r",
+ "p2sh_p2wpkh": "3JvL6Ymt8MVWiCNHC7oWU6nLeHNJKLZGLN",
+ "p2sh_p2wpkh_regtest": "2NAUYAHhujozruyzpsFRP63mbrdaU5wnEpN",
+ "p2wpkh": "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4",
+ "p2wpkh_regtest": "bcrt1qw508d6qejxtdg4y5r3zarvary0c5xw7kygt080",
+ "wif_compressed": "KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9M7rFU73sVHnoWn",
+ "wif_uncompressed": "5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreAnchuDf",
+ "wif_compressed_regtest": "cMahea7zqjxrtgAbB7LSGbcQUr1uX1ojuat9jZodMN87JcbXMTcA"
+}

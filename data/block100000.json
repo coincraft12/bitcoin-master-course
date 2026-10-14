@@ -1,0 +1,14 @@
+{
+  "_source": "https://raw.githubusercontent.com/btcsuite/btcd/master/btcutil/block_test.go (Block100000 \ud5e4\ub354 \ud544\ub4dc, wantHashStr, wantTxHashes)",
+  "_note": "\ud5e4\ub354 80\ubc14\uc774\ud2b8\ub294 \ud544\ub4dc\ub85c \uc870\ub9bd\ud55c \ub4a4 \ud574\uc2dc\uac00 wantHashStr\uc640 \uac19\uc74c\uc744 \ud655\uc778\ud588\ub2e4. merkle_root\ub294 \ud5e4\ub354\uc758 MerkleRoot \ud544\ub4dc(\ud45c\uc2dc \uc21c\uc11c).",
+  "height": 100000,
+  "hash": "000000000003ba27aa200b1cecaad478d2b00432346c3f1f3986da1afd33e506",
+  "header": "0100000050120119172a610421a6c3011dd330d9df07b63616c2cc1f1cd00200000000006657a9252aacd5c0b2940996ecff952228c3067cc38d4885efb5a4ac4247e9f337221b4d4c86041b0f2b5710",
+  "merkle_root": "f3e94742aca4b5ef85488dc37c06c3282295ffec960994b2c0d5ac2a25a95766",
+  "txids": [
+    "8c14f0db3df150123e6f3dbbf30f8b955a8249b62ac1d1ff16284aefa3d06d87",
+    "fff2525b8931402dd09222c50775608f75787bd2b87e56995a7bdd30f79702c4",
+    "6359f0868171b1d194cbee1af2f16ea598ae8fad666d9b012c8ed2b79a236ec4",
+    "e9a66845e05d5abc0ad04ec80f774a7e585c6e8db975962d069a522137b80c1d"
+  ]
+}
