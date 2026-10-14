@@ -11,7 +11,7 @@ from lib.taproot import (tagged_hash, lift_x, output_key, ser_compact, tapleaf_h
                          p2tr_script_pubkey)
 from lib import segwit_addr
 
-V = json.load(open(pathlib.Path(__file__).resolve().parents[1] / "data" / "bip341_wallet_test_vectors.json"))
+V = json.load(open(pathlib.Path(__file__).resolve().parents[1] / "data" / "bip341_wallet_test_vectors.json", encoding="utf-8"))
 SPK = V["scriptPubKey"]
 
 

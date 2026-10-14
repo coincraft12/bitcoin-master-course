@@ -11,9 +11,9 @@ from lib.ecdsa import verify, parse_der
 from lib import schnorr
 
 DATA = pathlib.Path(__file__).resolve().parents[1] / "data"
-LEGACY = json.load(open(DATA / "sighash.json"))[1:]
-B143 = json.load(open(DATA / "bip143_examples.json"))["examples"]
-B341 = json.load(open(DATA / "bip341_wallet_test_vectors.json"))["keyPathSpending"][0]
+LEGACY = json.load(open(DATA / "sighash.json", encoding="utf-8"))[1:]
+B143 = json.load(open(DATA / "bip143_examples.json", encoding="utf-8"))["examples"]
+B341 = json.load(open(DATA / "bip341_wallet_test_vectors.json", encoding="utf-8"))["keyPathSpending"][0]
 
 
 @pytest.mark.parametrize("raw,script,idx,hash_type,expected", LEGACY)
@@ -83,8 +83,8 @@ def test_scope_default_vs_none():
 
 def test_block170_satoshi_signature():
     # T-02(블록 170)의 서명을 블록 9 코인베이스 출력(P2PK)으로 검증: 레거시 sighash + ECDSA
-    t = parse_tx((DATA / "T-02.hex").read_text().strip())
-    p = parse_tx((DATA / "T-02_prev.hex").read_text().strip())
+    t = parse_tx((DATA / "T-02.hex").read_text(encoding="utf-8").strip())
+    p = parse_tx((DATA / "T-02_prev.hex").read_text(encoding="utf-8").strip())
     spk = bytes.fromhex(p["vout"][0]["scriptPubKey"])
     sig = parse_script(bytes.fromhex(t["vin"][0]["scriptSig"]))[0]
     pub = parse_script(spk)[0]

@@ -10,13 +10,13 @@ from lib.sighash import taproot_sighash
 from lib.schnorr import verify
 
 if "--demo" in sys.argv:
-    demo = json.load(open(pathlib.Path(__file__).resolve().parents[2] / "data" / "demo_txs.json"))["txs"]["p2tr"]
+    demo = json.load(open(pathlib.Path(__file__).resolve().parents[2] / "data" / "demo_txs.json", encoding="utf-8"))["txs"]["p2tr"]
     tx = parse_tx(demo["hex"])
     prev = [(demo["prev"]["value_sat"], bytes.fromhex(demo["prev"]["scriptPubKey"]))]
 else:
-    tx = parse_tx(open("tr1_spend.hex").read().strip())
+    tx = parse_tx(open("tr1_spend.hex", encoding="utf-8").read().strip())
     prev = [(round(p["amount"] * 1e8), bytes.fromhex(p["scriptPubKey"]["hex"]))
-            for p in json.load(open("prevouts.json"))]
+            for p in json.load(open("prevouts.json", encoding="utf-8"))]
 sig = bytes.fromhex(tx["vin"][0]["witness"][0])
 hash_type = sig[64] if len(sig) == 65 else 0x00
 msg = taproot_sighash(tx, prev, 0, hash_type)

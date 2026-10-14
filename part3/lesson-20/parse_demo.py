@@ -26,10 +26,10 @@ def show(name, hexstr):
 
 
 if len(sys.argv) > 1:
-    show(sys.argv[1], open(sys.argv[1]).read().strip())
+    show(sys.argv[1], open(sys.argv[1], encoding="utf-8").read().strip())
 else:
-    show("T-02 블록 170 (레거시)", (ROOT / "data" / "T-02.hex").read_text().strip())
-    demo = json.load(open(ROOT / "data" / "demo_txs.json"))["txs"]["p2wpkh"]
+    show("T-02 블록 170 (레거시)", (ROOT / "data" / "T-02.hex").read_text(encoding="utf-8").strip())
+    demo = json.load(open(ROOT / "data" / "demo_txs.json", encoding="utf-8"))["txs"]["p2wpkh"]
     show("demo P2WPKH 지출 (SegWit v0)", demo["hex"])
-    b143 = json.load(open(ROOT / "data" / "bip143_examples.json"))["examples"][0]
+    b143 = json.load(open(ROOT / "data" / "bip143_examples.json", encoding="utf-8"))["examples"][0]
     show("BIP143 Native P2WPKH 예제 (P2PK 입력 + P2WPKH 입력)", b143["signed_tx"])

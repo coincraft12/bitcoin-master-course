@@ -15,8 +15,8 @@ import json, re
 from collections import Counter
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-POOLS = json.load(open(ROOT / "data" / "coinbase_tags.json"))
-GEN = json.load(open(ROOT / "data" / "genesis_blocks.json"))
+POOLS = json.load(open(ROOT / "data" / "coinbase_tags.json", encoding="utf-8"))
+GEN = json.load(open(ROOT / "data" / "genesis_blocks.json", encoding="utf-8"))
 
 
 def slide_tag(cb: bytes) -> str:

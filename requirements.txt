@@ -1,2 +1,5 @@
 requests>=2.28
 pytest>=7
+
+# 선택: 7강 교차 확인(part3/lesson-28/cross_check.py)과 tests/test_ecdsa.py의 교차 테스트용. 없어도 나머지 실습은 모두 된다.
+# coincurve>=21

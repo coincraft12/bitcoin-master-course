@@ -8,7 +8,7 @@ from lib.ecdsa import verify, parse_der
 from lib.keys import parse_pubkey
 
 DATA = pathlib.Path(__file__).resolve().parents[1] / "data"
-DEMO = json.load(open(DATA / "demo_txs.json"))["txs"]["p2pkh"]
+DEMO = json.load(open(DATA / "demo_txs.json", encoding="utf-8"))["txs"]["p2pkh"]
 SPEND = parse_tx(DEMO["hex"])
 SCRIPT_SIG = bytes.fromhex(SPEND["vin"][0]["scriptSig"])
 SPK = bytes.fromhex(DEMO["prev"]["scriptPubKey"])

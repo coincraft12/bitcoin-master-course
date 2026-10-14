@@ -21,7 +21,7 @@ def make_checksig(tx, idx, script_code):
     return checksig
 
 
-demo = json.load(open(DATA / "demo_txs.json"))["txs"]["p2pkh"]
+demo = json.load(open(DATA / "demo_txs.json", encoding="utf-8"))["txs"]["p2pkh"]
 tx = parse_tx(demo["hex"]); spk = bytes.fromhex(demo["prev"]["scriptPubKey"])
 print("== ① demo P2PKH: 진짜 checksig ==")
 print("결과:", run(bytes.fromhex(tx["vin"][0]["scriptSig"]), spk, checksig=make_checksig(tx, 0, spk)))
@@ -29,8 +29,8 @@ tx["vout"][0]["value_sat"] -= 1                       # 서명 뒤에 금액을 
 print("출력 금액 1 sat 변조 후:", run(bytes.fromhex(tx["vin"][0]["scriptSig"]), spk,
                                    checksig=make_checksig(tx, 0, spk), trace=False))
 
-t02 = parse_tx((DATA / "T-02.hex").read_text().strip())
-prev = parse_tx((DATA / "T-02_prev.hex").read_text().strip())
+t02 = parse_tx((DATA / "T-02.hex").read_text(encoding="utf-8").strip())
+prev = parse_tx((DATA / "T-02_prev.hex").read_text(encoding="utf-8").strip())
 spk = bytes.fromhex(prev["vout"][t02["vin"][0]["vout"]]["scriptPubKey"])     # P2PK: <공개키 65B> OP_CHECKSIG
 print("\n== ② 블록 170 (P2PK) ==")
 print("결과:", run(bytes.fromhex(t02["vin"][0]["scriptSig"]), spk, checksig=make_checksig(t02, 0, spk)))

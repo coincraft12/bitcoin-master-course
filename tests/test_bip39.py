@@ -7,7 +7,7 @@ from lib.bip39 import WORDS, entropy_to_mnemonic, mnemonic_to_entropy, is_valid,
 from lib.bip32 import master, serialize
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-VECTORS = json.load(open(ROOT / "data" / "bip39_vectors.json"))["english"]
+VECTORS = json.load(open(ROOT / "data" / "bip39_vectors.json", encoding="utf-8"))["english"]
 
 
 def test_wordlist():

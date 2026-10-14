@@ -5,7 +5,7 @@ import pytest
 from lib.base58 import b58encode, b58decode, b58check_encode, b58check_decode
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-VECTORS = json.load(open(ROOT / "data" / "base58_encode_decode.json"))
+VECTORS = json.load(open(ROOT / "data" / "base58_encode_decode.json", encoding="utf-8"))
 
 
 @pytest.mark.parametrize("hexdata,b58", VECTORS)

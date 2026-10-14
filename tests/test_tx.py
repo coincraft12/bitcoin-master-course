@@ -13,8 +13,8 @@ from lib.tx import dsha256, read_varint, write_varint, parse_tx, serialize_tx
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
-T02 = (DATA / "T-02.hex").read_text().strip()
-T02_PREV = (DATA / "T-02_prev.hex").read_text().strip()
+T02 = (DATA / "T-02.hex").read_text(encoding="utf-8").strip()
+T02_PREV = (DATA / "T-02_prev.hex").read_text(encoding="utf-8").strip()
 
 
 def test_varint_table():
@@ -47,7 +47,7 @@ def test_block9_coinbase_fee_zero():
 
 
 def test_roundtrip_core_sighash_json():
-    rows = json.load(open(DATA / "sighash.json"))[1:]
+    rows = json.load(open(DATA / "sighash.json", encoding="utf-8"))[1:]
     assert len(rows) == 500
     for raw, *_ in rows:
         t = parse_tx(raw)
@@ -57,7 +57,7 @@ def test_roundtrip_core_sighash_json():
 
 
 def test_bip143_signed_vs_unsigned():
-    ex = json.load(open(DATA / "bip143_examples.json"))["examples"]
+    ex = json.load(open(DATA / "bip143_examples.json", encoding="utf-8"))["examples"]
     seen = set()
     for e in ex:
         if e["signed_tx"] is None or e["signed_tx"] in seen:
@@ -78,7 +78,7 @@ def test_bip143_signed_vs_unsigned():
 
 
 def test_bip341_witness_does_not_change_txid():
-    v = json.load(open(DATA / "bip341_wallet_test_vectors.json"))["keyPathSpending"][0]
+    v = json.load(open(DATA / "bip341_wallet_test_vectors.json", encoding="utf-8"))["keyPathSpending"][0]
     unsigned = v["given"]["rawUnsignedTx"]
     t = parse_tx(unsigned)
     for inp in v["inputSpending"]:
@@ -104,7 +104,7 @@ def test_trailing_bytes_rejected():
 def test_demo_txs_regenerate_identical():
     sys.path.insert(0, str(DATA))
     import make_demo_txs
-    assert make_demo_txs.make() == json.load(open(DATA / "demo_txs.json"))
+    assert make_demo_txs.make() == json.load(open(DATA / "demo_txs.json", encoding="utf-8"))
     for k, t in make_demo_txs.make()["txs"].items():
         p = parse_tx(t["hex"])
         assert serialize_tx(p).hex() == t["hex"]

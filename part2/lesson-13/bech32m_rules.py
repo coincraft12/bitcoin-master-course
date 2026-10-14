@@ -18,7 +18,7 @@ wrong = bech32_encode("bc", [1] + convertbits(prog32, 8, 5), Encoding.BECH32)
 print("v1을 bech32로 적으면:", wrong, "→ decode", segwit_addr.decode("bc", wrong))
 
 # 2) BIP350 무효 주소 벡터 중 '체크섬 알고리즘 오류' 네 개
-V = json.load(open(ROOT / "data" / "bech32_vectors.json"))
+V = json.load(open(ROOT / "data" / "bech32_vectors.json", encoding="utf-8"))
 for a in V["INVALID_ADDRESS"][1:6]:
     print("무효 벡터:", a, "→", segwit_addr.decode(a[:2].lower(), a))
 

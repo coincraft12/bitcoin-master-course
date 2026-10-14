@@ -8,6 +8,7 @@
 """
 import sys, pathlib; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
 import argparse
+import lib  # noqa: F401  (stdout을 UTF-8로 맞춘다: lib/__init__.py)
 
 ANCHOR = 330          # 앵커 출력 하나 (8-4)
 

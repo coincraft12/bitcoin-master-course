@@ -13,7 +13,7 @@ from lib.hashes import dsha256
 from lib.block import mine, retarget, bits_to_target, next_bits, TWO_WEEKS
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-prefix = bytes.fromhex(json.load(open(ROOT / "data" / "genesis_blocks.json"))["main"]["header"])[:76]
+prefix = bytes.fromhex(json.load(open(ROOT / "data" / "genesis_blocks.json", encoding="utf-8"))["main"]["header"])[:76]
 
 print("== 1. 제네시스 헤더로 채굴 (시간은 컴퓨터마다 다름) ==")
 for k in (8, 12, 16, 20):
@@ -37,7 +37,7 @@ week = 7 * 24 * 3600
 for label, span in (("1주", week), ("4주", 4 * week), ("10주", 10 * week)):
     print(f"2016블록이 {label:>3} → 타깃 ×{Fraction(retarget(old, span), old)}")
 print("Bitcoin Core pow_tests.cpp 벡터 (메인넷 파라미터, 마지막 건은 4배 상한 시험용 시각):")
-for v in json.load(open(ROOT / "data" / "pow_retarget_vectors.json"))["vectors"]:
+for v in json.load(open(ROOT / "data" / "pow_retarget_vectors.json", encoding="utf-8"))["vectors"]:
     span = v["last_block_time"] - v["first_block_time"]
     got = next_bits(v["old_bits"], v["first_block_time"], v["last_block_time"])
     print(f"  높이 {v['last_height'] + 1:>6}: 실제 {span / TWO_WEEKS:5.2f} × 2주, bits {v['old_bits']:#010x} → {got:#010x}"

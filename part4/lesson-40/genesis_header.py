@@ -11,7 +11,7 @@ import json
 from lib.block import parse_header, bits_to_target, check_pow, difficulty
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-G = json.load(open(ROOT / "data" / "genesis_blocks.json"))
+G = json.load(open(ROOT / "data" / "genesis_blocks.json", encoding="utf-8"))
 
 for net in ("main", "regtest"):
     raw = bytes.fromhex(G[net]["header"])

@@ -29,11 +29,11 @@ def main():
         sys.exit(__doc__)
     src, attacker, dst = sys.argv[1:]
     node, watch = RPC(), RPC(wallet="watch")
-    dec = node.decodepsbt(pathlib.Path(src).read_text().strip())
+    dec = node.decodepsbt(pathlib.Path(src).read_text(encoding="utf-8").strip())
     ins = [{"txid": i["txid"], "vout": i["vout"], "sequence": i["sequence"]} for i in dec["tx"]["vin"]]
     raw = node.createpsbt(ins, tampered_outputs(dec, attacker), dec["tx"]["locktime"])
     filled = watch.walletprocesspsbt(raw, False)["psbt"]
-    pathlib.Path(dst).write_text(filled + "\n")
+    pathlib.Path(dst).write_text(filled + "\n", encoding="utf-8")
     print(f"받는 주소를 {attacker} 로 바꾼 PSBT → {dst}")
     print("이제 check_psbt.py로 확인해 보라. 1번 항목에서 실패해야 정상이다.")
 

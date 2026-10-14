@@ -1,0 +1,5 @@
+# 줄바꿈: 저장소와 체크아웃 모두 LF (Windows autocrlf로 CRLF가 되면 sh 스크립트·데이터 해시 테스트가 깨진다)
+* text=auto eol=lf
+*.sh text eol=lf
+# 공식 테스트 벡터는 원본 바이트 그대로 둔다 (BIP340 csv는 원본이 CRLF)
+data/bip340_test_vectors.csv -text

@@ -37,7 +37,7 @@ def node_rows(paths):
     rpc = RPC()
     rows = []
     for p in paths:
-        hexstr = open(p).read().strip()
+        hexstr = open(p, encoding="utf-8").read().strip()
         mine = measure(hexstr)
         core = rpc.decoderawtransaction(hexstr)
         ok = all(mine[a] == core[b] for a, b in [("txid", "txid"), ("size", "size"), ("vsize", "vsize"), ("weight", "weight")])
@@ -53,6 +53,6 @@ if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "--node":
         rows = node_rows(sys.argv[2:])
     else:
-        demo = json.load(open(ROOT / "data" / "demo_txs.json"))["txs"]
+        demo = json.load(open(ROOT / "data" / "demo_txs.json", encoding="utf-8"))["txs"]
         rows = [(k, measure(t["hex"]), t["fee_sat"]) for k, t in demo.items()]
     print(table(rows))

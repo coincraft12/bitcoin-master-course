@@ -99,7 +99,7 @@ def main():
     ap.add_argument("--network", default="regtest")
     a = ap.parse_args()
 
-    psbt = pathlib.Path(a.psbt_file).read_text().strip()
+    psbt = pathlib.Path(a.psbt_file).read_text(encoding="utf-8").strip()
     node = RPC(a.network)
     signer = RPC(a.network, wallet=a.signer)
     dec = node.decodepsbt(psbt)

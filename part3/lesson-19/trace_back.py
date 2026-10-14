@@ -7,8 +7,8 @@ import sys, pathlib; sys.path.insert(0, str(pathlib.Path(__file__).resolve().par
 from lib.tx import parse_tx
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-tx = parse_tx((ROOT / "data" / "T-02.hex").read_text().strip())
-prev = parse_tx((ROOT / "data" / "T-02_prev.hex").read_text().strip())
+tx = parse_tx((ROOT / "data" / "T-02.hex").read_text(encoding="utf-8").strip())
+prev = parse_tx((ROOT / "data" / "T-02_prev.hex").read_text(encoding="utf-8").strip())
 
 
 def kind(spk_hex: str) -> str:

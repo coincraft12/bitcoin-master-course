@@ -6,7 +6,7 @@ from lib import segwit_addr
 from lib.segwit_addr import Encoding
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-V = json.load(open(ROOT / "data" / "bech32_vectors.json"))
+V = json.load(open(ROOT / "data" / "bech32_vectors.json", encoding="utf-8"))
 
 
 def segwit_scriptpubkey(witver, witprog):

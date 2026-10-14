@@ -12,7 +12,7 @@ from lib.keys import ser_compressed, parse_pubkey
 from lib.ecdsa import sign, verify, der, parse_der, rfc6979_nonce, sign_rfc6979
 
 DATA = pathlib.Path(__file__).resolve().parents[1] / "data"
-B143 = [e for e in json.load(open(DATA / "bip143_examples.json"))["examples"] if "privkey" in e]
+B143 = [e for e in json.load(open(DATA / "bip143_examples.json", encoding="utf-8"))["examples"] if "privkey" in e]
 D = int.from_bytes(hashlib.sha256(b"tests/test_ecdsa.py fixed key").digest(), "big") % N
 Q = point_mul(G, D)
 Z = int.from_bytes(hashlib.sha256(b"CoinCraft").digest(), "big")

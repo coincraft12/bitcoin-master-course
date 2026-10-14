@@ -8,7 +8,7 @@ import sys, pathlib; sys.path.insert(0, str(pathlib.Path(__file__).resolve().par
 from lib.tx import parse_tx
 
 import json, subprocess
-hexstr = open(sys.argv[1] if len(sys.argv) > 1 else "t03_segwit.hex").read().strip()
+hexstr = open(sys.argv[1] if len(sys.argv) > 1 else "t03_segwit.hex", encoding="utf-8").read().strip()
 mine = parse_tx(hexstr)
 core = json.loads(subprocess.check_output(
     ["bitcoin-cli", "-regtest", "decoderawtransaction", hexstr]))

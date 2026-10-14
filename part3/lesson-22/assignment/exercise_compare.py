@@ -27,8 +27,8 @@ def table(rows: list) -> str:
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         args = sys.argv[1:]
-        rows = [(pathlib.Path(h).stem, measure(open(h).read().strip()), int(f)) for h, f in zip(args[::2], args[1::2])]
+        rows = [(pathlib.Path(h).stem, measure(open(h, encoding="utf-8").read().strip()), int(f)) for h, f in zip(args[::2], args[1::2])]
     else:
-        demo = json.load(open(pathlib.Path(__file__).resolve().parents[3] / "data" / "demo_txs.json"))["txs"]
+        demo = json.load(open(pathlib.Path(__file__).resolve().parents[3] / "data" / "demo_txs.json", encoding="utf-8"))["txs"]
         rows = [(k, measure(t["hex"]), t["fee_sat"]) for k, t in demo.items()]
     print(table(rows))

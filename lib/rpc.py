@@ -21,7 +21,7 @@ class RPC:
         sub = "" if network == "main" else network
         cookie = os.path.join(datadir, sub, ".cookie")
         try:
-            user, pw = open(cookie).read().strip().split(":", 1)
+            user, pw = open(cookie, encoding="utf-8").read().strip().split(":", 1)
         except FileNotFoundError:
             raise RuntimeError(
                 f"쿠키 파일이 없습니다: {cookie}\n"

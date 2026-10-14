@@ -13,7 +13,7 @@ DATA = pathlib.Path(__file__).resolve().parents[2] / "data"
 NAMES = {0x00: "DEFAULT", 0x01: "ALL", 0x02: "NONE", 0x03: "SINGLE", 0x81: "ALL|ANYONECANPAY",
          0x82: "NONE|ANYONECANPAY", 0x83: "SINGLE|ANYONECANPAY"}
 
-k = json.load(open(DATA / "bip341_wallet_test_vectors.json"))["keyPathSpending"][0]
+k = json.load(open(DATA / "bip341_wallet_test_vectors.json", encoding="utf-8"))["keyPathSpending"][0]
 tx = parse_tx(k["given"]["rawUnsignedTx"])
 prev = [(u["amountSats"], bytes.fromhex(u["scriptPubKey"])) for u in k["given"]["utxosSpent"]]
 print("BIP341 키 경로 sigHash")
@@ -22,12 +22,12 @@ for inp in k["inputSpending"]:
     got = taproot_sighash(tx, prev, g["txinIndex"], g["hashType"]).hex()
     print(f"  입력 {g['txinIndex']} {NAMES[g['hashType']]:<20} {got[:16]}… {got == inp['intermediary']['sigHash']}")
 
-ok = 0; ex = json.load(open(DATA / "bip143_examples.json"))["examples"]
+ok = 0; ex = json.load(open(DATA / "bip143_examples.json", encoding="utf-8"))["examples"]
 for e in ex:
     t = parse_tx(e["unsigned_tx"])
     ok += bip143_sighash(t, e["input_index"], bytes.fromhex(e["script_code"]), e["amount_sat"], e["hash_type"]).hex() == e["sighash"]
 print(f"BIP143 예제 sigHash 일치 {ok}/{len(ex)}")
 
-rows = json.load(open(DATA / "sighash.json"))[1:]
+rows = json.load(open(DATA / "sighash.json", encoding="utf-8"))[1:]
 ok = sum(legacy_sighash(parse_tx(r), i, bytes.fromhex(s), h)[::-1].hex() == exp for r, s, i, h, exp in rows)
 print(f"레거시 sighash.json 일치 {ok}/{len(rows)}")

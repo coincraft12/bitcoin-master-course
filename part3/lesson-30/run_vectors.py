@@ -10,7 +10,7 @@ from lib.schnorr import sign, verify
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 passed = 0
-for row in csv.DictReader(open(ROOT / "data" / "bip340_test_vectors.csv")):   # 슬라이드는 "data/…" 상대 경로 (ERRATA s73-code2)
+for row in csv.DictReader(open(ROOT / "data" / "bip340_test_vectors.csv", encoding="utf-8")):   # 슬라이드는 "data/…" 상대 경로 (ERRATA s73-code2)
     pub, msg, sig = (bytes.fromhex(row[c]) for c in ("public key", "message", "signature"))
     ok = verify(msg, pub, sig) == (row["verification result"] == "TRUE")
     if row["secret key"]:

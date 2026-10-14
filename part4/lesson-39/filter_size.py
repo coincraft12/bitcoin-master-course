@@ -13,7 +13,7 @@ from lib.hashes import dsha256
 from lib.block import parse_header
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-rows = json.load(open(ROOT / "data" / "blockfilters.json"))[1:]
+rows = json.load(open(ROOT / "data" / "blockfilters.json", encoding="utf-8"))[1:]
 
 
 def filter_header(filter_hex: str, prev_header_hex: str) -> str:

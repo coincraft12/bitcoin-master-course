@@ -27,7 +27,9 @@ def explain(proof_hex: str):
 
 if __name__ == "__main__":
     if sys.argv[1:] == ["--demo"]:
-        B = json.load(open(pathlib.Path(__file__).resolve().parents[2] / "data" / "block100000.json"))
+        B = json.load(open(pathlib.Path(__file__).resolve().parents[2] / "data" / "block100000.json", encoding="utf-8"))
         explain(build_merkleblock(bytes.fromhex(B["header"]), B["txids"], {B["txids"][2]}))
     else:
+        if len(sys.argv) != 2:
+            sys.exit("사용법: python part4/lesson-41/txoutproof.py <PROOF hex>  또는  --demo")
         explain(sys.argv[1])

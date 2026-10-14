@@ -9,13 +9,13 @@ from lib.tx import parse_tx
 from lib.sighash import taproot_sighash
 
 if "--demo" in sys.argv:
-    demo = json.load(open(pathlib.Path(__file__).resolve().parents[2] / "data" / "demo_txs.json"))["txs"]["p2tr"]
+    demo = json.load(open(pathlib.Path(__file__).resolve().parents[2] / "data" / "demo_txs.json", encoding="utf-8"))["txs"]["p2tr"]
     tx = parse_tx(demo["hex"])
     prev = [(demo["prev"]["value_sat"], bytes.fromhex(demo["prev"]["scriptPubKey"]))]
 else:
-    tx = parse_tx(open("tr1_spend.hex").read().strip())
+    tx = parse_tx(open("tr1_spend.hex", encoding="utf-8").read().strip())
     prev = [(round(p["amount"] * 1e8), bytes.fromhex(p["scriptPubKey"]["hex"]))
-            for p in json.load(open("prevouts.json"))]
+            for p in json.load(open("prevouts.json", encoding="utf-8"))]
 
 m_default = taproot_sighash(tx, prev, 0, 0x00)
 m_none    = taproot_sighash(tx, prev, 0, 0x02)

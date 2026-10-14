@@ -37,6 +37,7 @@ bitcoin-master-course/
    ```bash
    python3 -m venv .venv && source .venv/bin/activate
    pip install -r requirements.txt
+   # 7강 교차 확인(선택): pip install coincurve
    ```
 3. **표준 실습 환경** (2-2): regtest 노드 + 지갑 miner·alice·bob
    ```bash

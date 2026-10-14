@@ -9,8 +9,8 @@ from lib.keys import (new_private_key, public_key, ser_uncompressed, ser_compres
                       address_to_script_pubkey)
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-KEY_IO = json.load(open(ROOT / "data" / "key_io_valid.json"))
-EX = json.load(open(ROOT / "data" / "lesson03_examples.json"))
+KEY_IO = json.load(open(ROOT / "data" / "key_io_valid.json", encoding="utf-8"))
+EX = json.load(open(ROOT / "data" / "lesson03_examples.json", encoding="utf-8"))
 WIF_VERSION = {"main": 0x80, "testnet4": 0xef, "signet": 0xef, "regtest": 0xef}
 
 
@@ -61,7 +61,7 @@ def test_core_addresses(addr, spk, meta):
 
 def test_p2sh_and_nested():
     # BIP49 테스트넷 벡터: m/49'/1'/0'/0/0 공개키 → 2Mww8dCYPUpKHofjgcXcBCEGmniw9CoaiD2
-    v = json.load(open(ROOT / "data" / "bip_derivation_vectors.json"))["bip49_testnet"]
+    v = json.load(open(ROOT / "data" / "bip_derivation_vectors.json", encoding="utf-8"))["bip49_testnet"]
     assert p2sh_p2wpkh_address(bytes.fromhex(v["pubkey_hex"]), 0xc4) == v["address"]
     assert p2sh_address(b"\x00\x14" + bytes(20)).startswith("3")
 

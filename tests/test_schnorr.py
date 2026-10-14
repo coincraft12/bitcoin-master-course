@@ -4,7 +4,7 @@ import csv
 import pytest
 from lib.schnorr import sign, verify, pubkey_gen
 
-ROWS = list(csv.DictReader(open(pathlib.Path(__file__).resolve().parents[1] / "data" / "bip340_test_vectors.csv")))
+ROWS = list(csv.DictReader(open(pathlib.Path(__file__).resolve().parents[1] / "data" / "bip340_test_vectors.csv", encoding="utf-8")))
 
 
 def test_vector_count():

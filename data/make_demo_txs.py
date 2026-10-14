@@ -104,7 +104,7 @@ def make() -> dict:
 
 if __name__ == "__main__":
     out = pathlib.Path(__file__).resolve().parent / "demo_txs.json"
-    out.write_text(json.dumps(make(), indent=1, ensure_ascii=False) + "\n")
-    for k, t in json.loads(out.read_text())["txs"].items():
+    out.write_text(json.dumps(make(), indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    for k, t in json.loads(out.read_text(encoding="utf-8"))["txs"].items():
         print(f"{k:<7} vsize {t['vsize']:>3}  weight {t['weight']:>3}  fee {t['fee_sat']} sat  txid {t['txid']}")
     print("저장:", out)

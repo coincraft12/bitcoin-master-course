@@ -16,10 +16,10 @@ from lib.block import (parse_header, bits_to_target, check_pow, merkle_root, min
                        extract_matches, build_merkleblock, signals_bit)
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-GEN = json.load(open(ROOT / "data" / "genesis_blocks.json"))
-B100K = json.load(open(ROOT / "data" / "block100000.json"))
-POW_VECTORS = json.load(open(ROOT / "data" / "pow_retarget_vectors.json"))["vectors"]
-FILTERS = json.load(open(ROOT / "data" / "blockfilters.json"))[1:]
+GEN = json.load(open(ROOT / "data" / "genesis_blocks.json", encoding="utf-8"))
+B100K = json.load(open(ROOT / "data" / "block100000.json", encoding="utf-8"))
+POW_VECTORS = json.load(open(ROOT / "data" / "pow_retarget_vectors.json", encoding="utf-8"))["vectors"]
+FILTERS = json.load(open(ROOT / "data" / "blockfilters.json", encoding="utf-8"))[1:]
 
 GENESIS_HEADER = bytes.fromhex(GEN["main"]["header"])
 

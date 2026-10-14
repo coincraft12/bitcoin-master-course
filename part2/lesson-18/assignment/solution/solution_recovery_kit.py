@@ -43,7 +43,7 @@ def self_check():
     """mainnet 경로 결과를 BIP 문서의 공식 벡터와 대조."""
     root = pathlib.Path(__file__).resolve().parents[4]
     import json
-    dv = json.load(open(root / "data" / "bip_derivation_vectors.json"))
+    dv = json.load(open(root / "data" / "bip_derivation_vectors.json", encoding="utf-8"))
     want84 = [a["address"] for a in dv["bip84"]["addresses"] if a["path"].split("/")[-2] == "0"]
     want86 = [a["address"] for a in dv["bip86"]["addresses"] if a["path"].split("/")[-2] == "0"]
     ok84 = bip84_addresses(TEST_MNEMONIC, len(want84), regtest=False) == want84

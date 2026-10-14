@@ -11,7 +11,7 @@ import json
 from lib.block import merkle_root, merkle_proof, verify_merkle_proof, parse_header
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-B = json.load(open(ROOT / "data" / "block100000.json"))
+B = json.load(open(ROOT / "data" / "block100000.json", encoding="utf-8"))
 txids = B["txids"]
 
 print("== 1. 블록 100,000 ==")

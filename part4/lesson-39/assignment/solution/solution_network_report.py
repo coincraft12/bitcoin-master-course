@@ -58,7 +58,7 @@ if __name__ == "__main__":
     for k, c in dist.items():
         print(f"{k}: {dict(c)}")
     if len(sys.argv) > 2:
-        lines = open(sys.argv[2], errors="replace").read().splitlines()
+        lines = open(sys.argv[2], errors="replace", encoding="utf-8").read().splitlines()
         events = parse_net_log(lines)[-40:]
         print("== 02 전파 시퀀스 (마지막 40개) ==")
         print(sequence_diagram(events))

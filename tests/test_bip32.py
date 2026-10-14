@@ -10,8 +10,8 @@ from lib.bip32 import (HARD, hmac512, master, ckd_priv, ckd_pub, parse_path, der
 from lib.taproot import output_key
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-B32 = json.load(open(ROOT / "data" / "bip32_vectors.json"))
-DV = json.load(open(ROOT / "data" / "bip_derivation_vectors.json"))
+B32 = json.load(open(ROOT / "data" / "bip32_vectors.json", encoding="utf-8"))
+DV = json.load(open(ROOT / "data" / "bip_derivation_vectors.json", encoding="utf-8"))
 CASES = [(v["vector"], v["seed"], ch) for v in B32["vectors"] for ch in v["chains"]]
 
 

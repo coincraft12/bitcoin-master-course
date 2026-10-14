@@ -12,12 +12,12 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 if len(sys.argv) > 1:
     from lib.rpc import RPC
-    spend = parse_tx(open(sys.argv[1]).read().strip())
+    spend = parse_tx(open(sys.argv[1], encoding="utf-8").read().strip())
     vin = spend["vin"][0]
     prev = RPC().getrawtransaction(vin["txid"], True)          # txindex=1 (env/bitcoin.conf)
     script_pubkey = bytes.fromhex(prev["vout"][vin["vout"]]["scriptPubKey"]["hex"])
 else:
-    demo = json.load(open(ROOT / "data" / "demo_txs.json"))["txs"]["p2pkh"]
+    demo = json.load(open(ROOT / "data" / "demo_txs.json", encoding="utf-8"))["txs"]["p2pkh"]
     spend = parse_tx(demo["hex"])
     vin = spend["vin"][0]
     script_pubkey = bytes.fromhex(demo["prev"]["scriptPubKey"])
