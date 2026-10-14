@@ -25,7 +25,7 @@ for T in legacy p2sh-segwit bech32 bech32m; do
   U=$($CLI -rpcwallet=alice listunspent 1 9999999 "[\"${ADDR[$T]}\"]" | jq -c '.[0] | {txid, vout}')
   TXID=$($CLI -rpcwallet=alice send "{\"$BOB\":0.09}" null "unset" 5 \
     "{\"inputs\":[$U],\"add_inputs\":false,\"change_type\":\"bech32\"}" | jq -r .txid)
-  D=$($CLI -rpcwallet=alice gettransaction "$TXID" true)
+  D=$($CLI -rpcwallet=alice gettransaction "$TXID" false true)
   VSIZE=$(echo "$D" | jq '.decoded.vsize'); WEIGHT=$(echo "$D" | jq '.decoded.weight')
   echo "$D" | jq -r .hex > "$OUTDIR/spend_$T.hex"
   printf "%-12s %10s %8s %18s\n" "$T" "$VSIZE" "$WEIGHT" "$((VSIZE * 5))"

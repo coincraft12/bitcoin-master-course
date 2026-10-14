@@ -15,7 +15,9 @@ fi
 
 if ! $CLI2 getblockchaininfo >/dev/null 2>&1; then
 mkdir -p /tmp/node2
-bitcoind -regtest -datadir=/tmp/node2 -port=18555 -rpcport=18556 \
+# (저장소 보탬) -bind: Core는 P2P 포트+1(18556)에 Tor 인바운드용 리스너를 기본으로 여는데 RPC 포트와 겹쳐
+# "Unable to bind to 127.0.0.1:18556"으로 시작에 실패한다. -bind를 주면 그 리스너를 만들지 않는다. ERRATA.md 참고
+bitcoind -regtest -datadir=/tmp/node2 -port=18555 -rpcport=18556 -bind=0.0.0.0:18555 \
   -fallbackfee=0.0002 -debug=net -daemon
 fi
 until $CLI2 getblockchaininfo >/dev/null 2>&1; do sleep 1; done   # (저장소 보탬) RPC가 뜰 때까지 대기

@@ -6,6 +6,9 @@
 # (signet 노드 동기화 필요, 입금은 signet 파우셋에서 직접 — 스크립트가 확인될 때까지 기다린다).
 # ※ 작성 환경에는 노드가 없어 bash -n·shellcheck와 디스크립터·주소 계산(vault_descriptor.py)만 확인했다.
 #   MUSIG=1의 2라운드 서명 흐름은 특히 실행 검증하지 못했다.
+#   (저장소 점검: regtest·Core 31.1에서 MUSIG=0은 키 경로·스크립트 경로·복구 경로 모두 통과.
+#    MUSIG=1은 끝까지 돌지만 첫 송금이 키 경로가 아니라 스크립트 경로로 나간다 — 서명 지갑에 musig() 디스크립터가
+#    없어 논스가 만들어지지 않는다. ERRATA.md 참고. 출력의 "(실제: …)" 표시를 믿을 것)
 #
 #   bash part5/lesson-60/final_project/solution/vault_wallet.sh
 #   OLDER=144 NETWORK=signet bash part5/lesson-60/final_project/solution/vault_wallet.sh
@@ -40,7 +43,7 @@ done
 K0=$(tr_xpub fp_owner); K1=$(tr_xpub fp_k1); K2=$(tr_xpub fp_k2); K3=$(tr_xpub fp_k3); R=$(tr_xpub fp_rescue)
 ARGS=(--k1 "$K1" --k2 "$K2" --k3 "$K3" --rescue "$R" --older "$OLDER")
 if [ "$MUSIG" = 1 ]; then ARGS+=(--musig); else ARGS+=(--keypath "$K0"); fi
-mapfile -t D < <($PY build "${ARGS[@]}" --quiet)
+mapfile -t D < <($PY build "${ARGS[@]}" --quiet | tr -d '\r')   # Windows용 Python은 줄 끝에 \r을 붙인다
 EXT=${D[0]}; INT=${D[1]}
 # 파이썬이 붙인 체크섬과 Core의 체크섬이 같은지
 for X in "$EXT" "$INT"; do
@@ -78,7 +81,8 @@ DEST=$($CLI -rpcwallet="$VAULT" getrawchangeaddress bech32m)     # 실습 송금
 
 new_psbt() {   # $1 = 입력 sequence (없으면 지갑 기본)
   if [ -n "$1" ]; then
-    local u; u=$($CLI -rpcwallet="$VAULT" listunspent 1 | jq -c '.[0] | {txid, vout}')
+    # 가장 큰 UTXO (앞선 송금이 0.1 BTC짜리 조각을 만들어, 첫 번째 UTXO는 0.1 BTC + 수수료를 못 댈 수 있다)
+    local u; u=$($CLI -rpcwallet="$VAULT" listunspent 1 | jq -c 'max_by(.amount) | {txid, vout}')
     $CLI -rpcwallet="$VAULT" walletcreatefundedpsbt \
       "[{\"txid\":$(echo "$u" | jq .txid),\"vout\":$(echo "$u" | jq .vout),\"sequence\":$1}]" \
       "[{\"$DEST\":0.1}]" 0 '{"add_inputs":false,"fee_rate":5}' | jq -r .psbt

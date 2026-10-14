@@ -22,7 +22,7 @@ bitcoin-cli -regtest getmempoolentry $TX2 | jq '{vsize, fees}'
 
 echo "# TX1과 TX2 비교: 입력은 같고, txid가 바뀌고, 잔돈 출력이 줄었다"
 for T in $TX1 $TX2; do
-  bitcoin-cli -regtest -rpcwallet=alice gettransaction $T true \
+  bitcoin-cli -regtest -rpcwallet=alice gettransaction $T false true \
     | jq -c '{txid, vin: [.decoded.vin[] | "\(.txid):\(.vout)"], vout: [.decoded.vout[] | {value, address: .scriptPubKey.address}]}'
 done
 

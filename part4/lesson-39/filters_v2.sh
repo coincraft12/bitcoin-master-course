@@ -27,8 +27,8 @@ if $CLI2 getblockchaininfo >/dev/null 2>&1; then
   $CLI2 stop >/dev/null
   while $CLI2 getblockchaininfo >/dev/null 2>&1; do sleep 1; done
   sleep 2
-  bitcoind -regtest -datadir=/tmp/node2 -port=18555 -rpcport=18556 \
-    -fallbackfee=0.0002 -debug=net -daemon -v2transport=0
+  bitcoind -regtest -datadir=/tmp/node2 -port=18555 -rpcport=18556 -bind=0.0.0.0:18555 \
+    -fallbackfee=0.0002 -debug=net -daemon -v2transport=0   # -bind: Tor 리스너(18556)와 RPC 포트 충돌 방지 (ERRATA.md)
   until $CLI2 getblockchaininfo >/dev/null 2>&1; do sleep 1; done
   $CLI addnode 127.0.0.1:18555 onetry
   sleep 3

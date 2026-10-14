@@ -21,10 +21,10 @@ bitcoin-cli -regtest estimatesmartfee 6 | jq -c .
 echo "# 3단계: alice → bob 0.1 BTC, fee_rate 5 sat/vB"
 TXID=$(bitcoin-cli -regtest -rpcwallet=alice -named sendtoaddress \
   address=$(bitcoin-cli -regtest -rpcwallet=bob getnewaddress) amount=0.1 fee_rate=5)
-bitcoin-cli -regtest -rpcwallet=alice gettransaction $TXID true | jq '{fee, vsize: .decoded.vsize}'
+bitcoin-cli -regtest -rpcwallet=alice gettransaction $TXID false true | jq '{fee, vsize: .decoded.vsize}'
 # fee는 BTC 단위 음수 → sat로 바꿔 5 × vsize와 비교
 python3 part4/lesson-32/fee_calc.py --check \
-  "$(bitcoin-cli -regtest -rpcwallet=alice gettransaction $TXID true | jq -c '{fee, vsize: .decoded.vsize}')" 5 || true
+  "$(bitcoin-cli -regtest -rpcwallet=alice gettransaction $TXID false true | jq -c '{fee, vsize: .decoded.vsize}')" 5 || true
 
 echo "# 마무리: 3-5(T-03)에서 저장한 유형별 지출로 같은 금액 송금의 수수료 차이 (5 sat/vB)"
 if ls data/T-03/spend_*.hex >/dev/null 2>&1; then
