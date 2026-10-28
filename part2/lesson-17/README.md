@@ -23,7 +23,7 @@
 ## 실습 순서
 1. `listdescriptors` → 8개(pkh · sh(wpkh) · wpkh · tr × 받는용·잔돈용). 함수·지문·경로(84h/1h/0h, regtest라 coin_type 1h)를 해부도와 대조. `internal: true`가 잔돈용
 2. 받는용 wpkh 디스크립터를 `DESC`에 꺼내 `getdescriptorinfo`, `deriveaddresses "$DESC" "[0,4]"` (지갑 없이!) → `getnewaddress`와 순서대로 대조
-3. `watch2`(disable_private_keys, blank)에 `importdescriptors` (timestamp 0) → `getbalances`의 watchonly에 alice의 bech32 코인이 보인다 → 5-4 PSBT의 워치온리 구성
+3. `watch2`(disable_private_keys, blank)에 `importdescriptors` (timestamp 0) → `getbalances`의 `mine.trusted`에 alice의 bech32 코인이 보인다 → 5-4 PSBT의 워치온리 구성
 4. xpub 한 글자를 바꾸고 체크섬은 그대로 → `getdescriptorinfo` 오류
 5. `policy_exercises.md`
 
@@ -62,7 +62,7 @@ DESC=wpkh([73c5da0a/84h/1h/0h]tpubDC8msFGeGuwnKG9Upg7DM2b4DaRqg3CUZa5g8v2SRQ6K4N
 ]
 ```
 - `deriveaddresses`와 `descriptor_offline.py`의 주소 다섯 개가 같아야 한다.
-- 3단계 `getbalances`의 `watchonly.trusted`가 alice의 bech32 받는 주소 잔액과 같아야 한다.
+- 3단계 `getbalances`의 `mine.trusted`가 alice의 bech32 받는 주소 잔액과 같아야 한다.
 - 4단계는 `Provided checksum 'evh9fu0w' does not match computed checksum '…'` 형태의 오류가 나야 한다.
 
 ## 퀴즈
